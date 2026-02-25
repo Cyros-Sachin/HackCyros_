@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="auth-bg">
+  <div class="auth-terminal">
+
+    <h2 class="auth-title">SYSTEM ACCESS REQUIRED</h2>
+    <p class="auth-sub">AUTHENTICATION PROTOCOL v2.0</p>
+
+    {% include "components/errors.html" %}
+
+    {% if integrations.mlc() %}
+      <a class="btn brutal-btn w-100 mb-3" href="{{ url_for('auth.oauth_login') }}">
+        LOGIN WITH MAJOR LEAGUE CYBER
+      </a>
+      <div class="divider"></div>
+    {% endif %}
+
+    {% with form = Forms.auth.LoginForm() %}
+      <form method="post" accept-charset="utf-8">
+
+        <div class="brutal-field">
+          {{ form.name.label(class="form-label") }}
+          {{ form.name(class="form-control brutal-input", value=name, autocomplete="username email") }}
+        </div>
+
+        <div class="brutal-field">
+          {{ form.password.label(class="form-label") }}
+          {{ form.password(class="form-control brutal-input", value=password, autocomplete="current-password") }}
+        </div>
+
+       
+
+        <div class="mt-4">
+          {{ form.submit(class="btn brutal-btn w-100") }}
+        </div>
+
+        {{ form.nonce() }}
+      </form>
+    {% endwith %}
+
+    <div class="auth-footer">
+      UNAUTHORIZED ACCESS WILL BE LOGGED
+    </div>
+
+  </div>
+</div>
+<script>
+  document.addEventListener("mousemove", e => {
+    document.querySelector(".auth-bg").style.background =
+      `radial-gradient(circle at ${e.clientX}px ${e.clientY}px, #300000, #000 60%)`;
+  });
+</script>
+
+{% endblock %}

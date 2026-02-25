@@ -1,0 +1,389 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Share+Tech+Mono&display=swap"
+  rel="stylesheet">
+
+<style>
+  .cyros-bg {
+    height: 100vh;
+    background: radial-gradient(circle at center, #0a0000, #000000 70%);
+    position: relative;
+    color: #ff2e2e;
+    overflow: hidden;
+    font-family: 'Orbitron', sans-serif;
+    animation: screenShift 6s infinite ease-in-out alternate;
+  }
+
+  /* SCREEN INSTABILITY */
+  @keyframes screenShift {
+    0% {
+      transform: translate(0px, 0px);
+    }
+
+    25% {
+      transform: translate(0.5px, -0.5px);
+    }
+
+    50% {
+      transform: translate(-0.5px, 0.5px);
+    }
+
+    75% {
+      transform: translate(0.3px, -0.3px);
+    }
+
+    100% {
+      transform: translate(0px, 0px);
+    }
+  }
+
+  /* RED CORE GLOW */
+  .cyros-bg::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at center, rgba(255, 0, 0, 0.15), transparent 60%);
+    pointer-events: none;
+    animation: corePulse 4s infinite alternate;
+  }
+
+  @keyframes corePulse {
+    from {
+      opacity: 0.2;
+    }
+
+    to {
+      opacity: 0.5;
+    }
+  }
+
+  .glitch {
+    position: relative;
+    display: inline-block;
+  }
+
+  .glitch::before,
+  .glitch::after {
+    content: attr(data-text);
+    position: absolute;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .glitch::before {
+    left: 2px;
+    text-shadow: -2px 0 #00ffff;
+    clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%);
+    animation: glitchTop 0.8s infinite linear alternate-reverse;
+  }
+
+  .glitch::after {
+    left: -2px;
+    text-shadow: -2px 0 #ff00ff;
+    clip-path: polygon(0 55%, 100% 55%, 100% 100%, 0 100%);
+    animation: glitchBottom 0.8s infinite linear alternate-reverse;
+  }
+
+
+  /* BLOOD FLASH */
+  .cyros-bg::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 0, 0, 0.04);
+    animation: pulsebg 2s infinite alternate;
+  }
+
+  @keyframes pulsebg {
+    from {
+      opacity: 0.03;
+    }
+
+    to {
+      opacity: 0.10;
+    }
+  }
+
+  /* SCANLINES */
+  .overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(0deg,
+        rgba(255, 0, 0, 0.06),
+        rgba(255, 0, 0, 0.06) 2px,
+        transparent 2px,
+        transparent 4px);
+    animation: scan 5s linear infinite;
+  }
+
+  @keyframes scan {
+    from {
+      background-position: 0 0;
+    }
+
+    to {
+      background-position: 0 100%;
+    }
+  }
+
+  /* RANDOM POWER FLASH */
+  body::after {
+    content: "";
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 0, 0, 0.02);
+    pointer-events: none;
+    animation: randomFlash 5s infinite;
+  }
+
+  @keyframes randomFlash {
+
+    0%,
+    95%,
+    100% {
+      opacity: 0;
+    }
+
+    96% {
+      opacity: 0.2;
+    }
+  }
+
+  /* CENTER */
+  .center-box {
+    position: relative;
+    top: 42%;
+    transform: translateY(-50%);
+    text-align: center;
+    z-index: 3;
+  }
+
+  /* TITLE */
+  .title {
+    font-size: 4.7rem;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    position: relative;
+    animation: flicker 2.5s infinite;
+    text-shadow:
+      0 0 5px red,
+      0 0 15px red,
+      0 0 25px red,
+      0 0 40px rgba(255, 0, 0, 0.6);
+  }
+
+  @keyframes flicker {
+
+    0%,
+    18%,
+    22%,
+    25%,
+    53%,
+    57%,
+    100% {
+      opacity: 1;
+    }
+
+    20%,
+    24%,
+    55% {
+      opacity: 0.3;
+    }
+  }
+
+
+
+  @keyframes glitchTop {
+    from {
+      transform: translate(4px, -4px);
+    }
+
+    to {
+      transform: translate(-4px, 4px);
+    }
+  }
+
+  @keyframes glitchBottom {
+    from {
+      transform: translate(-4px, 4px);
+    }
+
+    to {
+      transform: translate(4px, -4px);
+    }
+  }
+
+  /* TAGLINE */
+  .tagline {
+    margin-top: 12px;
+    font-size: 1.2rem;
+    letter-spacing: 4px;
+    color: #ff4d4d;
+    animation: blink 1.2s infinite;
+  }
+
+  @keyframes blink {
+    50% {
+      opacity: 0.2;
+    }
+  }
+
+  /* TERMINAL */
+  .terminal {
+    font-family: 'Share Tech Mono', monospace;
+    color: #ff3c3c;
+    margin-top: 30px;
+    font-size: 0.95rem;
+    opacity: 0.85;
+  }
+
+  .terminal::after {
+    content: " █";
+    animation: cursorBlink 1s steps(2) infinite;
+  }
+
+  @keyframes cursorBlink {
+    50% {
+      opacity: 0;
+    }
+  }
+
+  /* BUTTON */
+  .btn-main {
+    display: inline-block;
+    margin-top: 35px;
+    padding: 14px 40px;
+    border: 2px solid #ff0000;
+    color: #ff0000;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-decoration: none;
+    transition: 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .btn-main:hover {
+    background: #ff0000;
+    color: black;
+    box-shadow: 0 0 30px red;
+    transform: scale(1.08);
+  }
+
+  .btn-main::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    background: red;
+    top: 0;
+    left: -100%;
+    animation: scanlineBtn 2s linear infinite;
+  }
+
+  @keyframes scanlineBtn {
+    to {
+      left: 100%;
+    }
+  }
+
+  @keyframes screenGlitch {
+
+    0%,
+    98%,
+    100% {
+      transform: none;
+    }
+
+    99% {
+      transform: skewX(15deg) scale(1.02);
+    }
+  }
+
+  .cyros-bg {
+    animation: screenShift 6s infinite ease-in-out alternate,
+      screenGlitch 8s infinite;
+  }
+
+  .warning {
+    font-size: 0.9rem;
+    letter-spacing: 3px;
+    color: #ff0000;
+    animation: flicker 1s infinite;
+  }
+  
+</style>
+
+<div class="cyros-bg">
+  <div class="overlay"></div>
+
+  <div class="center-box">
+    <div class="warning">⚠ SYSTEM BREACH DETECTED ⚠</div>
+    <h1 class="title glitch" data-text="HackCyros 2.0">HackCyros 2.0</h1>
+    <p class="tagline">SYSTEM HOSTILE • NO MERCY MODE</p>
+    <p class="tagline">This Time, We’re Brutally Brutal , because We Don’t Give Hints. We Give Nightmares...!!</p>
+
+    <div class="terminal">
+      > intrusion detection disabled<br>
+      > firewall integrity: compromised<br>
+      > survival probability: 3%<br>
+      > user skill level: unknown<br>
+    </div>
+
+    <a href="/login" class="btn-main">ENTER IF YOU DARE</a>
+  </div>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+{{ Assets.js("assets/js/page.js") }}
+<script>
+  const lines = [
+    "initializing breach protocol...",
+    "bypassing ethical constraints...",
+    "loading nightmare engine...",
+    "injecting chaos...",
+    "challenge mode: merciless"
+  ];
+
+  let i = 0;
+  const term = document.querySelector(".terminal");
+
+  function typeLine() {
+    if (i >= lines.length) return;
+    let text = "> " + lines[i];
+    let j = 0;
+    let lineEl = document.createElement("div");
+    term.appendChild(lineEl);
+
+    let typer = setInterval(() => {
+      lineEl.textContent += text[j];
+      j++;
+      if (j >= text.length) {
+        clearInterval(typer);
+        i++;
+        setTimeout(typeLine, 400);
+      }
+    }, 25);
+  }
+
+  term.innerHTML = "";
+  typeLine();
+</script>
+<script>
+  document.addEventListener("mousemove", e => {
+    document.querySelector(".cyros-bg").style.background =
+      `radial-gradient(circle at ${e.clientX}px ${e.clientY}px, #300000, #000 60%)`;
+  });
+</script>
+
+
+{% endblock %}

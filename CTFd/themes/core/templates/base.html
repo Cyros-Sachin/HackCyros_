@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>{{ title or Configs.ctf_name }}</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="{{ Configs.ctf_small_icon }}" type="image/x-icon">
+
+  {{ meta | safe }}
+
+  {% block stylesheets %}
+  {{ Assets.css("assets/scss/main.scss") }}
+  {% endblock %}
+
+  {{ Plugins.styles }}
+
+  {{ Assets.js("assets/js/color_mode_switcher.js", type=None) }}
+
+  <script type="text/javascript">
+    window.init = {
+      'urlRoot': "{{ request.script_root }}",
+      'csrfNonce': "{{ Session.nonce }}",
+      'userMode': "{{ Configs.user_mode }}",
+      'userId': {{ Session.id }},
+          'userName': {{ User.name | tojson }},
+          'userEmail': {{ User.email | tojson }},
+          'userVerified': {{ User.verified | tojson }},
+          'teamId': {{ Team.id | tojson }},
+          'teamName': {{ Team.name | tojson }},
+          'start': {{ Configs.start | tojson }},
+          'end': {{ Configs.end | tojson }},
+          'themeSettings': {{ Configs.theme_settings | tojson }},
+    'eventSounds': [
+      "/themes/core/static/sounds/notification.webm",
+      "/themes/core/static/sounds/notification.mp3",
+    ],
+      }
+  </script>
+  <style>
+    /* Remove Bootstrap gray background */
+    body {
+      background: radial-gradient(circle at center, #0a0000, #000 70%) !important;
+    }
+
+    /* Make main section transparent */
+    main {
+      background: transparent !important;
+    }
+
+    /* ===== CUSTOM SYSTEM NAVBAR ===== */
+    .brutal-nav {
+      background: linear-gradient(to bottom, #0a0a0a, #000);
+      border-bottom: 1px solid rgba(255, 0, 0, 0.5);
+      box-shadow: 0 0 20px rgba(255, 0, 0, 0.3);
+      font-family: 'Orbitron', sans-serif;
+    }
+
+    /* Brand */
+    .brutal-nav .navbar-brand {
+      color: #ff0000 !important;
+      font-weight: 900;
+      letter-spacing: 2px;
+      text-shadow: 0 0 8px red;
+    }
+
+    /* Links */
+    .brutal-nav .nav-link {
+      color: #ff4d4d !important;
+      text-transform: uppercase;
+      font-size: 0.8rem;
+      letter-spacing: 2px;
+      margin-left: 18px;
+      position: relative;
+      transition: 0.3s;
+    }
+
+    /* Hover glow */
+    .brutal-nav .nav-link:hover {
+      color: #ffffff !important;
+      text-shadow: 0 0 10px red;
+    }
+
+    /* Underline effect */
+    .brutal-nav .nav-link::after {
+      content: "";
+      position: absolute;
+      width: 0%;
+      height: 2px;
+      background: red;
+      bottom: 0;
+      left: 0;
+      transition: 0.3s;
+    }
+
+    .brutal-nav .nav-link:hover::after {
+      width: 100%;
+    }
+
+    /* Dropdown */
+    .brutal-nav .dropdown-menu {
+      background: #0a0000;
+      border: 1px solid red;
+    }
+
+    .brutal-nav .dropdown-item {
+      color: #ff4d4d;
+    }
+
+    .brutal-nav .dropdown-item:hover {
+      background: #1a0000;
+      color: white;
+    }
+
+    /* Toggler */
+    .brutal-nav .navbar-toggler {
+      border-color: red;
+    }
+
+    /* ===== SYSTEM FOOTER ===== */
+    .system-footer {
+      background: linear-gradient(to top, #050505, #000);
+      border-top: 1px solid rgba(255, 0, 0, 0.4);
+      padding: 15px 0;
+      margin-top: 60px;
+      font-family: 'Share Tech Mono', monospace;
+      color: #ff4d4d;
+      box-shadow: 0 -0px 20px rgba(255, 0, 0, 0.2);
+    }
+
+    /* Top line */
+    .footer-line {
+      font-size: 0.85rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      animation: footerPulse 2s infinite alternate;
+    }
+
+    @keyframes footerPulse {
+      from {
+        opacity: 0.7;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    /* Status highlight */
+    .status {
+      color: #ff0000;
+      text-shadow: 0 0 8px red;
+    }
+
+    /* Bottom text */
+    .footer-sub {
+      font-size: 0.75rem;
+      margin-top: 5px;
+      color: #aa3333;
+    }
+
+    .footer-sub a {
+      color: #ff4444;
+      text-decoration: none;
+    }
+
+    .footer-sub a:hover {
+      color: white;
+      text-shadow: 0 0 6px red;
+    }
+
+    /* ===== AUTH SCREEN ===== */
+    .auth-bg {
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: radial-gradient(circle at center, #0a0000, #000 70%);
+      font-family: 'Share Tech Mono', monospace;
+    }
+
+    /* Terminal box */
+    .auth-terminal {
+      background: rgba(0, 0, 0, 0.92);
+      border: 2px solid #ff0000;
+      padding: 40px;
+      width: 380px;
+      text-align: center;
+      box-shadow: 0 0 40px rgba(255, 0, 0, 0.4);
+    }
+
+    /* Title */
+    .auth-title {
+      color: #ff0000;
+      letter-spacing: 3px;
+      text-shadow: 0 0 8px red;
+    }
+
+    .auth-sub {
+      font-size: 0.8rem;
+      color: #ff4444;
+      margin-bottom: 20px;
+    }
+
+    /* Fields */
+    .brutal-field {
+      margin-bottom: 18px;
+      text-align: left;
+    }
+
+    .brutal-input {
+      background: black;
+      border: 1px solid #ff0000;
+      color: #ff4444;
+    }
+
+    .brutal-input:focus {
+      box-shadow: 0 0 10px red;
+      border-color: #ff0000;
+      background: black;
+      color: white;
+    }
+
+    /* Links */
+    .auth-links {
+      font-size: 0.75rem;
+      text-align: right;
+    }
+
+    .auth-links a {
+      color: #ff4444;
+      text-decoration: none;
+    }
+
+    .auth-links a:hover {
+      color: white;
+      text-shadow: 0 0 6px red;
+    }
+
+    /* Button */
+    .brutal-btn {
+      background: black;
+      color: #ff0000;
+      border: 2px solid #ff0000;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .brutal-btn:hover {
+      background: #ff0000;
+      color: black;
+      box-shadow: 0 0 20px red;
+    }
+
+    /* Divider */
+    .divider {
+      height: 1px;
+      background: rgba(255, 0, 0, 0.4);
+      margin: 15px 0;
+    }
+
+    /* Footer warning */
+    .auth-footer {
+      margin-top: 20px;
+      font-size: 0.7rem;
+      color: #aa3333;
+    }
+
+    .cyros-header {
+      padding: 60px 0 30px;
+      background: radial-gradient(circle at center, #150000, #000);
+      text-align: center;
+      border-bottom: 1px solid #330000;
+    }
+
+    .db-title {
+      font-family: 'Orbitron', sans-serif;
+      color: #ff2e2e;
+      letter-spacing: 6px;
+      text-shadow: 0 0 10px red;
+      animation: flicker 2.5s infinite;
+    }
+
+    .db-sub {
+      color: #ff4d4d;
+      letter-spacing: 3px;
+      font-size: 0.9rem;
+    }
+
+    .table {
+      color: #ff4d4d;
+      border: 1px solid #330000;
+      background: rgba(5, 0, 0, 0.7);
+    }
+
+    .table thead {
+      background: #120000;
+      color: #ff0000;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    .table-striped tbody tr:nth-of-type(odd) {
+      background: rgba(255, 0, 0, 0.03);
+    }
+
+    .table tbody tr:hover {
+      background: rgba(255, 0, 0, 0.12);
+      box-shadow: 0 0 10px red inset;
+      transform: scale(1.01);
+    }
+
+    .war-header {
+      padding: 60px 0 30px;
+      background: radial-gradient(circle at center, #180000, #000);
+      border-bottom: 1px solid #330000;
+    }
+
+    .war-title {
+      font-family: 'Orbitron', sans-serif;
+      color: #ff1a1a;
+      letter-spacing: 6px;
+      text-shadow: 0 0 20px red;
+      animation: flicker 2.5s infinite;
+    }
+
+    .war-sub {
+      color: #ff4d4d;
+      letter-spacing: 4px;
+      font-size: 0.9rem;
+    }
+
+    /* ===== SYSTEM PANEL ===== */
+    .system-panel {
+      background: rgba(0, 0, 0, 0.92);
+      border: 2px solid #ff0000;
+      padding: 30px;
+      box-shadow: 0 0 40px rgba(255, 0, 0, 0.3);
+    }
+
+    /* Header */
+    .system-header {
+      text-align: center;
+      padding: 50px 0 20px 0;
+    }
+
+    .system-title {
+      color: #ff0000;
+      text-shadow: 0 0 10px red;
+      letter-spacing: 4px;
+    }
+
+    .system-sub {
+      color: #aa3333;
+      font-size: 0.8rem;
+      letter-spacing: 3px;
+    }
+
+    /* Table */
+    .brutal-table {
+      background: black;
+      color: #ff4444;
+      border: 1px solid #ff0000;
+    }
+
+    .brutal-table thead {
+      background: #1a0000;
+      color: #ff0000;
+    }
+
+    .brutal-table th,
+    .brutal-table td {
+      border-color: #220000 !important;
+    }
+
+    .brutal-table tr:hover {
+      background: rgba(255, 0, 0, 0.05);
+    }
+
+    /* Inputs */
+    .brutal-input {
+      background: black;
+      border: 1px solid #ff0000;
+      color: #ff4444;
+    }
+
+    .brutal-input:focus {
+      box-shadow: 0 0 10px red;
+      border-color: #ff0000;
+    }
+
+    /* Buttons */
+    .brutal-btn {
+      background: black;
+      color: #ff0000;
+      border: 2px solid #ff0000;
+      text-transform: uppercase;
+    }
+
+    .brutal-btn:hover {
+      background: #ff0000;
+      color: black;
+      box-shadow: 0 0 15px red;
+    }
+
+    .mission-header {
+      padding: 60px 0 30px;
+      background: radial-gradient(circle at center, #140000, #000);
+      border-bottom: 1px solid #330000;
+    }
+
+    .mission-title {
+      font-family: 'Orbitron', sans-serif;
+      color: #ff2e2e;
+      letter-spacing: 6px;
+      text-shadow: 0 0 20px red;
+      animation: flicker 2.5s infinite;
+    }
+
+    .mission-sub {
+      color: #ff4d4d;
+      letter-spacing: 3px;
+      font-size: 0.9rem;
+    }
+    
+  </style>
+
+
+  {{ Configs.theme_header }}
+</head>
+
+<body>
+  {% include "components/navbar.html" %}
+
+  <main role="main">
+    {% block content %}
+    {% endblock %}
+  </main>
+
+  {% include "components/snackbar.html" %}
+  <footer class="system-footer">
+    <div class="container text-center">
+
+      <div class="footer-line">
+        SYSTEM STATUS: <span class="status">COMPROMISED</span> •
+        SECURITY LEVEL: <span class="status">CRITICAL</span> •
+        MONITORING: ACTIVE
+      </div>
+
+      <div class="footer-sub">
+        <span>HACKCYROS 2.0 | Designed By Cyros</span>
+      </div>
+
+    </div>
+  </footer>
+
+
+  {% include "components/notifications.html" %}
+
+  {% block scripts %}
+  {{ Assets.js("assets/js/page.js") }}
+
+  {% endblock %}
+
+  {{ Plugins.scripts }}
+
+  {{ Configs.theme_footer }}
+</body>
+
+</html>

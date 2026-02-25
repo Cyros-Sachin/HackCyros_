@@ -1,0 +1,177 @@
+<div x-data>
+  <style>
+    /* ================= SYSTEM ALERT TOAST ================= */
+    .toast {
+      background: linear-gradient(135deg, #120000, #1a0000) !important;
+      border: 1px solid #330000 !important;
+      color: #ffb3b3 !important;
+      box-shadow: 0 0 25px rgba(255, 0, 0, 0.25) !important;
+      border-radius: 6px !important;
+      backdrop-filter: blur(4px);
+      font-family: monospace;
+    }
+
+    .toast-header {
+      background: #0d0000 !important;
+      border-bottom: 1px solid #330000 !important;
+      color: #ff4d4d !important;
+      font-weight: 600;
+      letter-spacing: 1px;
+    }
+
+    .toast-header small {
+      color: #ff8080 !important;
+    }
+
+    .toast-body {
+      color: #ff9999 !important;
+      font-size: 0.9rem;
+    }
+
+    .toast .btn-close {
+      filter: invert(1) brightness(0.7);
+    }
+
+    .toast.show {
+      animation: alertSlide 0.35s ease-out;
+    }
+
+    @keyframes alertSlide {
+      from {
+        transform: translateY(20px);
+        opacity: 0;
+      }
+
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    /* ================= GLOBAL SYSTEM MODAL ================= */
+    .modal-content {
+      background: radial-gradient(circle at top left, #150000, #060000) !important;
+      border: 1px solid #330000 !important;
+      box-shadow: 0 0 40px rgba(255, 0, 0, 0.3) !important;
+      color: #ffb3b3 !important;
+      border-radius: 8px !important;
+    }
+
+    .modal-header {
+      border-bottom: 1px solid #330000 !important;
+    }
+
+    .modal-title {
+      color: #ff2e2e !important;
+      letter-spacing: 2px !important;
+    }
+
+    .modal-body {
+      color: #ff9999 !important;
+    }
+
+    .modal-footer {
+      border-top: 1px solid #330000 !important;
+    }
+
+    .modal-footer .btn-primary {
+      background: linear-gradient(45deg, #8b0000, #ff0000) !important;
+      border: none !important;
+      letter-spacing: 1px;
+    }
+
+    .modal-footer .btn-primary:hover {
+      box-shadow: 0 0 12px red !important;
+    }
+
+    .modal-backdrop.show {
+      background: #000 !important;
+      opacity: 0.9 !important;
+    }
+
+    .jumbotron,
+    .challenge-header {
+      background: linear-gradient(to bottom, #0a0a0a, #000) !important;
+      border-bottom: 1px solid #220000 !important;
+    }
+
+    .jumbotron h1 {
+      color: #ff2e2e !important;
+      letter-spacing: 4px !important;
+      text-shadow: 0 0 10px rgba(255, 0, 0, 0.6);
+    }
+
+    .card,
+    .notification {
+      background: linear-gradient(135deg, #0d0d0d, #150000) !important;
+      border: 1px solid #330000 !important;
+      border-left: 4px solid red !important;
+      box-shadow: 0 0 20px rgba(255, 0, 0, 0.08) !important;
+      border-radius: 6px !important;
+      transition: 0.3s;
+    }
+
+    .card:hover {
+      box-shadow: 0 0 25px red !important;
+      transform: translateY(-3px);
+    }
+
+    .card-title {
+      color: #ff4d4d !important;
+      font-weight: 600;
+      letter-spacing: 1px;
+    }
+
+    .card-text {
+      color: #ff9999 !important;
+      font-family: monospace;
+    }
+
+    .text-muted {
+      color: #ff6a6a !important;
+      font-size: 0.75rem;
+    }
+  </style>
+  <script>
+    document.querySelectorAll('.card').forEach((c, i) => {
+      const level = i % 3;
+      if (level === 0) c.style.borderLeftColor = "#ff0000";
+      if (level === 1) c.style.borderLeftColor = "#ff8800";
+      if (level === 2) c.style.borderLeftColor = "#ffcc00";
+    });
+  </script>
+
+
+  <!-- ===== TOAST ===== -->
+  <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+    <div x-ref="toast" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true"
+      data-bs-autohide="false">
+      <div class="toast-header">
+        <strong class="me-auto" x-text="$store.toast.title"></strong>
+        <small>SYSTEM EVENT</small>
+        <button type="button" class="btn-close" data-bs-dismiss="toast"></button>
+      </div>
+      <div class="toast-body" x-html="$store.toast.html"></div>
+    </div>
+  </div>
+</div>
+
+<div x-data>
+  <!-- ===== GLOBAL MODAL ===== -->
+  <div class="modal fade" x-ref="modal" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" x-text="$store.modal.title"></h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <p x-html="$store.modal.html"></p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal">ACKNOWLEDGE</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

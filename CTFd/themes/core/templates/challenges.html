@@ -1,0 +1,230 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="challenge-header">
+  <div class="container">
+    <h1 class="page-title">Challenges</h1>
+    <p class="page-sub">Select a target and deploy your solution</p>
+  </div>
+</div>
+
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      {% include "components/errors.html" %}
+    </div>
+  </div>
+
+  <div x-data="ChallengeBoard" @load-challenges.window="loadChallenges()"
+    @load-challenge.window="loadChallenge($event.detail)">
+    <div x-ref="challengeWindow" id="challenge-window" class="modal fade" tabindex="-1" role="dialog" x-data=""
+      x-html="$store.challenge.data.view"></div>
+
+    <div x-show="!loaded">
+      <div class="min-vh-50 d-flex align-items-center">
+        <div class="text-center w-100">
+          <i class="fas fa-circle-notch fa-spin fa-3x fa-fw spinner"></i>
+        </div>
+      </div>
+    </div>
+
+    <div x-show="loaded">
+      <template x-for="(category, idx) in getCategories()" :key="idx">
+        <div class="pt-5">
+          <div class="category-header">
+            <h3 class="category-title" x-text="category"></h3>
+          </div>
+
+
+          <div class="category-challenges d-flex flex-column">
+            <div class="challenges-row row">
+              <template x-for="(c, idx) in getChallenges(category)" :key="c.id">
+                <div class="col-sm-6 col-md-4 col-lg-3 my-3">
+                  <button class="challenge-button btn btn-dark w-100 h-100" :class="[
+                          c.solved_by_me ? 'challenge-solved' : '',
+                          ...c.tags.map((tag) => `tag-${tag.value.replace(/ /g, '-')}`),
+                        ];" :value="c.id" @click="loadChallenge(c.id)">
+
+                    <div class="challenge-inner">
+                      <p class="challenge-name" x-text="c.name"></p>
+                      <div class="challenge-meta">
+                        <span class="challenge-value" x-text="c.value + ' pts'"></span>
+                        <span class="challenge-status" x-show="c.solved_by_me">Solved</span>
+                      </div>
+                    </div>
+
+                  </button>
+                </div>
+              </template>
+            </div>
+          </div>
+        </div>
+      </template>
+    </div>
+  </div>
+</div>
+<style>
+
+/* ================= HEADER ================= */
+.challenge-header {
+  padding: 90px 0 55px !important;
+  background:
+    radial-gradient(circle at 20% 30%, rgba(255,0,0,0.08), transparent 40%),
+    radial-gradient(circle at 80% 70%, rgba(255,0,0,0.06), transparent 40%),
+    linear-gradient(to bottom, #090909, #000) !important;
+  border-bottom: 1px solid #1a0000 !important;
+  position: relative;
+  overflow: hidden;
+}
+
+/* faint scan lines */
+.challenge-header::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(255,0,0,0.02),
+    rgba(255,0,0,0.02) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+  pointer-events: none;
+}
+
+.page-title {
+  font-size: 3rem !important;
+  font-weight: 700 !important;
+  color: #ff2e2e !important;
+  letter-spacing: 4px !important;
+  text-shadow: 0 0 12px rgba(255,0,0,0.6);
+  animation: flicker 3s infinite;
+}
+
+.page-sub {
+  margin-top: 10px !important;
+  color: #ff6a6a !important;
+  letter-spacing: 2px !important;
+  font-size: 0.9rem !important;
+  opacity: 0.8;
+}
+
+
+/* ================= CATEGORY ================= */
+.category-title {
+  font-size: 1.1rem !important;
+  letter-spacing: 1px !important;
+  color: #ff4d4d !important;
+  border-left: 3px solid #ff4d4d !important;
+  padding-left: 10px !important;
+  text-transform: uppercase !important;
+}
+
+/* ================= CHALLENGE CARDS ================= */
+.challenge-button {
+  background: #141414 !important;
+  border: 1px solid #222 !important;
+  border-radius: 8px !important;
+  padding: 18px !important;
+  text-align: left !important;
+  transition: all 0.25s ease !important;
+}
+
+.challenge-button:hover {
+  border-color: #ff4d4d !important;
+  transform: translateY(-4px) !important;
+  box-shadow: 0 8px 18px rgba(0,0,0,0.5) !important;
+}
+
+.challenge-name {
+  font-size: 1rem !important;
+  font-weight: 500 !important;
+  color: #e5e5e5 !important;
+  margin-bottom: 12px !important;
+}
+
+.challenge-meta {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+}
+
+.challenge-value {
+  font-size: 0.85rem !important;
+  color: #aaa !important;
+}
+
+.challenge-status {
+  font-size: 0.75rem !important;
+  background: #1f2b1f !important;
+  color: #6dff6d !important;
+  padding: 3px 8px !important;
+  border-radius: 4px !important;
+}
+
+.challenge-solved {
+  background: #101610 !important;
+  border-color: #1f2b1f !important;
+  opacity: 0.85 !important;
+}
+
+/* WHOLE CHALLENGE MODAL */
+#challenge-window .modal-content {
+  background: radial-gradient(circle at top left, #140000, #050000) !important;
+  border: 1px solid #330000 !important;
+  box-shadow: 0 0 30px rgba(255,0,0,0.2) !important;
+  color: #ffb3b3 !important;
+}
+
+/* TITLE */
+#challenge-window .modal-title {
+  color: #ff2e2e !important;
+  letter-spacing: 2px !important;
+}
+
+/* DESCRIPTION */
+#challenge-window .modal-body {
+  color: #ff9999 !important;
+}
+
+/* FLAG INPUT BOX */
+#challenge-window input[type="text"] {
+  background: #0a0000 !important;
+  border: 1px solid #550000 !important;
+  color: #ff4d4d !important;
+  font-family: monospace !important;
+}
+
+#challenge-window input[type="text"]:focus {
+  border-color: red !important;
+  box-shadow: 0 0 10px red !important;
+}
+
+/* SUBMIT BUTTON */
+#challenge-window .btn-primary {
+  background: linear-gradient(45deg, #8b0000, #ff0000) !important;
+  border: none !important;
+  letter-spacing: 1px;
+}
+
+#challenge-window .btn-primary:hover {
+  background: linear-gradient(45deg, #ff0000, #ff4d4d) !important;
+  box-shadow: 0 0 12px red !important;
+}
+
+/* SOLVED STATE MESSAGE */
+#challenge-window .alert-success {
+  background: #100 !important;
+  border: 1px solid #330000 !important;
+  color: #ff8080 !important;
+}
+
+
+</style>
+
+{% endblock %}
+
+{% block scripts %}
+{{ Assets.js("assets/js/challenges.js") }}
+{% endblock %}

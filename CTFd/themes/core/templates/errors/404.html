@@ -3,17 +3,14 @@
 {% block content %}
 
 <div class="container">
-	<div class="row">
-		<div class="col-md-12">
-			<div class="pt-5 mt-5 text-center">
-				<h1>{% trans %}File not found{% endtrans %}</h1>
-				<hr class="w-50 m-auto">
-				<br/>
-				<h2>{% trans %}404 Not Found{% endtrans %}</h2>
-			</div>
-		</div>
-	</div>
+  <div class="error-scene">
+    <div>
+      <div class="error-code" data-code="404">404</div>
+      <div class="error-title">{% trans %}File not found{% endtrans %}</div>
+      <div class="error-sub">This universe doesn't exist. It was lost in the collapse.</div>
+      <a href="{{ url_for('views.static_html', route='/') }}" class="error-home">Return To Earth-616</a>
+    </div>
+  </div>
 </div>
-
 
 {% endblock %}

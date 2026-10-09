@@ -1,0 +1,9 @@
+SANCTUM MAINFRAME -- CANDIDATE DOSSIER B
+Name on record: (unconfirmed)
+Known aliases: v0_intern
+Pager: 555-0133
+Timezone (last login): UTC+05:30
+Last known location: seen near Cosmic Grounds Cafe, reflection tagged "616-B"
+Status: ACTIVE LEAD
+Last post found: "Did anyone else's multiverse just... stop?"
+FLAG: HC4{V4r14nt_Z3r0_W4s_Just_4n_1nt3rn_f499a3da1072}

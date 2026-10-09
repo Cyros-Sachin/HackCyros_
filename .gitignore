@@ -80,3 +80,7 @@ node_modules/
 
 # Flask Profiler files
 flask_profiler.sql
+
+# CUJ CTF 2026 challenge set — flags/fragments/solutions must never be committed
+cuj-ctf-2026/
+hackcyros-4.0/

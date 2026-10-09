@@ -3,18 +3,14 @@
 {% block content %}
 
 <div class="container">
-	<div class="row">
-		<div class="col-md-12">
-			<div class="pt-5 mt-5 text-center">
-				<h1>{% trans %}Too many requests{% endtrans %}</h1>
-				<h1>{% trans %}Please slow down!{% endtrans %}</h1>
-				<hr class="w-50 m-auto">
-				<br/>
-				<h2>{% trans %}429 Too Many Requests{% endtrans %}</h2>
-			</div>
-		</div>
-	</div>
+  <div class="error-scene">
+    <div>
+      <div class="error-code" data-code="429">429</div>
+      <div class="error-title">{% trans %}Too many requests{% endtrans %}</div>
+      <div class="error-sub">{% trans %}Please slow down!{% endtrans %} — the timeline can't keep up with you.</div>
+      <a href="{{ url_for('views.static_html', route='/') }}" class="error-home">Wait It Out</a>
+    </div>
+  </div>
 </div>
-
 
 {% endblock %}

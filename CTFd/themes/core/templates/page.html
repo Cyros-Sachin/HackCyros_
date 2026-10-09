@@ -2,15 +2,12 @@
 
 {% block content %}
 
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Share+Tech+Mono&display=swap"
-  rel="stylesheet">
-
 <style>
   .cyros-bg {
     height: 100vh;
-    background: radial-gradient(circle at center, #0a0000, #000000 70%);
+    background: radial-gradient(circle at center, #000a02, #000000 70%);
     position: relative;
-    color: #ff2e2e;
+    color: #2eff5c;
     overflow: hidden;
     font-family: 'Orbitron', sans-serif;
     animation: screenShift 6s infinite ease-in-out alternate;
@@ -39,13 +36,13 @@
     }
   }
 
-  /* RED CORE GLOW */
+  /* GREEN CORE GLOW */
   .cyros-bg::before {
     content: "";
     position: absolute;
     width: 100%;
     height: 100%;
-    background: radial-gradient(circle at center, rgba(255, 0, 0, 0.15), transparent 60%);
+    background: radial-gradient(circle at center, rgba(0, 255, 56, 0.15), transparent 60%);
     pointer-events: none;
     animation: corePulse 4s infinite alternate;
   }
@@ -89,13 +86,13 @@
   }
 
 
-  /* BLOOD FLASH */
+  /* ENERGY FLASH */
   .cyros-bg::after {
     content: "";
     position: absolute;
     width: 100%;
     height: 100%;
-    background: rgba(255, 0, 0, 0.04);
+    background: rgba(0, 255, 56, 0.04);
     animation: pulsebg 2s infinite alternate;
   }
 
@@ -115,8 +112,8 @@
     width: 100%;
     height: 100%;
     background: repeating-linear-gradient(0deg,
-        rgba(255, 0, 0, 0.06),
-        rgba(255, 0, 0, 0.06) 2px,
+        rgba(0, 255, 56, 0.06),
+        rgba(0, 255, 56, 0.06) 2px,
         transparent 2px,
         transparent 4px);
     animation: scan 5s linear infinite;
@@ -138,7 +135,7 @@
     position: fixed;
     width: 100%;
     height: 100%;
-    background: rgba(255, 0, 0, 0.02);
+    background: rgba(0, 255, 56, 0.02);
     pointer-events: none;
     animation: randomFlash 5s infinite;
   }
@@ -167,16 +164,16 @@
 
   /* TITLE */
   .title {
-    font-size: 4.7rem;
+    font-size: clamp(1.8rem, 5vw, 3.4rem);
     letter-spacing: 6px;
     text-transform: uppercase;
     position: relative;
     animation: flicker 2.5s infinite;
     text-shadow:
-      0 0 5px red,
-      0 0 15px red,
-      0 0 25px red,
-      0 0 40px rgba(255, 0, 0, 0.6);
+      0 0 5px #2ee86a,
+      0 0 15px #2ee86a,
+      0 0 25px #2ee86a,
+      0 0 40px rgba(0, 255, 56, 0.6);
   }
 
   @keyframes flicker {
@@ -225,7 +222,7 @@
     margin-top: 12px;
     font-size: 1.2rem;
     letter-spacing: 4px;
-    color: #ff4d4d;
+    color: #4dff74;
     animation: blink 1.2s infinite;
   }
 
@@ -238,7 +235,7 @@
   /* TERMINAL */
   .terminal {
     font-family: 'Share Tech Mono', monospace;
-    color: #ff3c3c;
+    color: #3cff67;
     margin-top: 30px;
     font-size: 0.95rem;
     opacity: 0.85;
@@ -260,8 +257,8 @@
     display: inline-block;
     margin-top: 35px;
     padding: 14px 40px;
-    border: 2px solid #ff0000;
-    color: #ff0000;
+    border: 2px solid #00ff38;
+    color: #00ff38;
     text-transform: uppercase;
     letter-spacing: 2px;
     text-decoration: none;
@@ -271,9 +268,9 @@
   }
 
   .btn-main:hover {
-    background: #ff0000;
+    background: #00ff38;
     color: black;
-    box-shadow: 0 0 30px red;
+    box-shadow: 0 0 30px #2ee86a;
     transform: scale(1.08);
   }
 
@@ -282,7 +279,7 @@
     position: absolute;
     width: 100%;
     height: 2px;
-    background: red;
+    background: #2ee86a;
     top: 0;
     left: -100%;
     animation: scanlineBtn 2s linear infinite;
@@ -315,31 +312,97 @@
   .warning {
     font-size: 0.9rem;
     letter-spacing: 3px;
-    color: #ff0000;
+    color: #00ff38;
     animation: flicker 1s infinite;
   }
-  
+
+  .version-mark {
+    display: block;
+    margin-top: 28px;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.4rem;
+    color: #00ff38;
+    letter-spacing: 3px;
+    text-shadow: 0 0 10px #2ee86a, 0 0 24px rgba(0, 255, 56, 0.6);
+    animation: flicker 4s infinite;
+    position: relative;
+  }
+
+  .version-mark::before {
+    content: "";
+    display: block;
+    width: 90px;
+    height: 1px;
+    margin: 0 auto 14px;
+    background: linear-gradient(90deg, transparent, #00ff38, transparent);
+    opacity: 0.6;
+  }
+
+  .body-count {
+    margin-top: 18px;
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+    color: #338846;
+  }
+
+  .body-count span {
+    color: #3cff67;
+  }
+
+  .tagline-desc {
+    margin-top: 22px;
+    font-size: 0.95rem;
+    letter-spacing: 1.5px;
+    line-height: 1.9;
+    color: #b6ffd0;
+    max-width: 620px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
 </style>
 
 <div class="cyros-bg">
   <div class="overlay"></div>
 
   <div class="center-box">
-    <div class="warning">⚠ SYSTEM BREACH DETECTED ⚠</div>
-    <h1 class="title glitch" data-text="HackCyros 2.0">HackCyros 2.0</h1>
-    <p class="tagline">SYSTEM HOSTILE • NO MERCY MODE</p>
-    <p class="tagline">This Time, We’re Brutally Brutal , because We Don’t Give Hints. We Give Nightmares...!!</p>
+    <div class="warning">⚠ INCURSION DETECTED — MULTIVERSE UNSTABLE ⚠</div>
+    <h1 class="title glitch" data-text="HackCyros 4.0: MULTIVERSE COLLAPSED">HackCyros 4.0: MULTIVERSE COLLAPSED</h1>
+    <div class="version-mark">4.0 — AVENGERS: DOOMSDAY</div>
+    <p class="tagline">MULTIVERSE COLLAPSED • DOOM APPROACHES</p>
+    <p class="tagline-desc">
+      The multiverse is collapsing and Doom is at the gates.<br>
+      Break the code, solve the incursions, and save every timeline.<br>
+      Only the strongest team will stand when reality ends.
+    </p>
 
     <div class="terminal">
-      > intrusion detection disabled<br>
-      > firewall integrity: compromised<br>
-      > survival probability: 3%<br>
-      > user skill level: unknown<br>
+      > timeline integrity: shattered<br>
+      > variant count: infinite<br>
+      > survival probability: 14,000,605 : 1<br>
+      > hints remaining: classified by S.H.I.E.L.D.<br>
+      > hero status: about to find out<br>
     </div>
 
-    <a href="/login" class="btn-main">ENTER IF YOU DARE</a>
+    <a href="/login" class="btn-main">ASSEMBLE</a>
+
+    <div class="body-count">
+      PREVIOUS SEASON HEROES ASSEMBLED: <span id="body-count-num">2,981</span> HACKERS
+    </div>
   </div>
 </div>
+
+<script>
+  (function () {
+    var el = document.getElementById('body-count-num');
+    if (!el) return;
+    var base = 2981;
+    setInterval(function () {
+      base += Math.floor(Math.random() * 3);
+      el.textContent = base.toLocaleString();
+    }, 3500);
+  })();
+</script>
 
 {% endblock %}
 
@@ -347,11 +410,13 @@
 {{ Assets.js("assets/js/page.js") }}
 <script>
   const lines = [
-    "initializing breach protocol...",
-    "bypassing ethical constraints...",
-    "loading nightmare engine...",
-    "injecting chaos...",
-    "challenge mode: merciless"
+    "initializing multiverse protocol v4.0...",
+    "opening a portal to Earth-616...",
+    "loading Doomsday engine...",
+    "locking the Infinity Vault...",
+    "destabilising timelines...",
+    "calculating variants...",
+    "challenge mode: Doomsday"
   ];
 
   let i = 0;
@@ -381,7 +446,7 @@
 <script>
   document.addEventListener("mousemove", e => {
     document.querySelector(".cyros-bg").style.background =
-      `radial-gradient(circle at ${e.clientX}px ${e.clientY}px, #300000, #000 60%)`;
+      `radial-gradient(circle at ${e.clientX}px ${e.clientY}px, #00300b, #000 60%)`;
   });
 </script>
 

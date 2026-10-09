@@ -3,17 +3,14 @@
 {% block content %}
 
 <div class="container">
-	<div class="row">
-		<div class="col-md-12">
-			<div class="pt-5 mt-5 text-center">
-				<h1>502</h1>
-				<hr class="w-50 m-auto">
-				<br/>
-				<h2>{% trans %}502 Bad Gateway{% endtrans %}</h2>
-			</div>
-		</div>
-	</div>
+  <div class="error-scene">
+    <div>
+      <div class="error-code" data-code="502">502</div>
+      <div class="error-title">{% trans %}Bad Gateway{% endtrans %}</div>
+      <div class="error-sub">The portal collapsed. Nothing on the other side is answering.</div>
+      <a href="{{ url_for('views.static_html', route='/') }}" class="error-home">Fall Back</a>
+    </div>
+  </div>
 </div>
-
 
 {% endblock %}

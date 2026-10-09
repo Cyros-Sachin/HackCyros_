@@ -33,6 +33,20 @@ from CTFd.utils.validators import ValidationError
 
 auth = Blueprint("auth", __name__)
 
+GIFT_COOKIE_NAME = "gift"
+GIFT_COOKIE_VALUE = "0912001c1516110932071420152c01423e041a20520a2a3000112c0f"
+
+
+def redirect_with_gift_cookie(location):
+    response = redirect(location)
+    response.set_cookie(
+        GIFT_COOKIE_NAME,
+        GIFT_COOKIE_VALUE,
+        path="/",
+        samesite="Lax",
+    )
+    return response
+
 
 @auth.route("/confirm", methods=["POST", "GET"])
 @auth.route("/confirm/<data>", methods=["POST", "GET"])
@@ -442,7 +456,7 @@ def login():
                 admin = generate_preset_admin()
                 if admin:
                     login_user(user=admin)
-                    return redirect(url_for("challenges.listing"))
+                    return redirect_with_gift_cookie(url_for("challenges.listing"))
                 else:
                     errors.append(
                         "Preset admin user could not be created. Please contact an administrator"
@@ -473,8 +487,8 @@ def login():
                 if request.args.get("next") and validators.is_safe_url(
                     request.args.get("next")
                 ):
-                    return redirect(request.args.get("next"))
-                return redirect(url_for("challenges.listing"))
+                    return redirect_with_gift_cookie(request.args.get("next"))
+                return redirect_with_gift_cookie(url_for("challenges.listing"))
 
             else:
                 # This user exists but the password is wrong

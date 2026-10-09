@@ -1,0 +1,24 @@
+; Leaked zone transfer (AXFR) capture -- wakanda.sh
+; Shuri says the site is not hidden, just "misconfigured." She wasn't kidding.
+$ORIGIN wakanda.sh.
+$TTL 3600
+
+@       IN SOA  ns1.wakanda.sh. admin.wakanda.sh. (
+                2026091401 ; serial
+                3600       ; refresh
+                600        ; retry
+                1209600    ; expire
+                3600 )     ; minimum
+
+@       IN NS   ns1.wakanda.sh.
+@       IN NS   ns2.wakanda.sh.
+@       IN A    41.12.88.10
+www     IN A    41.12.88.10
+mail    IN A    41.12.88.11
+vpn     IN A    41.12.88.12
+
+@       IN TXT  "v=spf1 ip4:41.12.88.11 -all"
+@       IN TXT  "Shuri: do not tell T'Challa I forgot to remove this -- HC4{Shur1_S4ys_DNS_1s_N0t_V1br4n1um_f1282975fd80}"
+
+variant0 IN A   41.12.88.99
+variant0 IN TXT "staging host, decommission after the incursion review (see M03)"

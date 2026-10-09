@@ -58,6 +58,54 @@ services:
     networks:
         internal:
 
+  possessed-pages-medium:
+    build: ./cuj-ctf-2026/challenges/possessed-pages/medium/src
+    restart: unless-stopped
+    ports:
+      - "8103:80"
+
+  possessed-pages-hard:
+    build: ./cuj-ctf-2026/challenges/possessed-pages/hard/src
+    restart: unless-stopped
+    ports:
+      - "8104:80"
+
+  possessed-pages-hard2:
+    build: ./cuj-ctf-2026/challenges/possessed-pages/hard2/src
+    restart: unless-stopped
+    ports:
+      - "8105:80"
+
+  possessed-pages-impossible:
+    build: ./cuj-ctf-2026/challenges/possessed-pages/impossible/src
+    restart: unless-stopped
+    ports:
+      - "8106:80"
+
+  possession-beginner:
+    build: ./cuj-ctf-2026/challenges/possession/beginner/src
+    restart: unless-stopped
+    ports:
+      - "9001:9001"
+
+  possession-easy:
+    build: ./cuj-ctf-2026/challenges/possession/easy/src
+    restart: unless-stopped
+    ports:
+      - "9002:9002"
+
+  possession-medium:
+    build: ./cuj-ctf-2026/challenges/possession/medium/src
+    restart: unless-stopped
+    ports:
+      - "9003:9003"
+
+  final-exorcism:
+    build: ./cuj-ctf-2026/challenges/final-exorcism/src
+    restart: unless-stopped
+    ports:
+      - "9999:9999"
+
 networks:
     default:
     internal:

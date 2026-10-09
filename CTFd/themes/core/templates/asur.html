@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container">
+  <div class="error-scene">
+    <div>
+      <div class="error-code" data-code="404">404</div>
+      <div class="error-title">You found the hidden page!</div>
+      <div class="error-sub">Some things aren't meant to be found. You found this one anyway.</div>
+      <div class="error-sub" style="margin-top: 20px; color: transparent; text-shadow: none; letter-spacing: 1px; font-size: 1rem; user-select: text; cursor: default;">
+        haunted{3vEn_rob0t5_feAr_8h0s1s}
+      </div>
+      <a href="{{ url_for('views.static_html', route='/') }}" class="error-home">Crawl Back To Safety</a>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

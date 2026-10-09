@@ -2,29 +2,29 @@
   <style>
     /* ================= SYSTEM ALERT TOAST ================= */
     .toast {
-      background: linear-gradient(135deg, #120000, #1a0000) !important;
-      border: 1px solid #330000 !important;
-      color: #ffb3b3 !important;
-      box-shadow: 0 0 25px rgba(255, 0, 0, 0.25) !important;
+      background: linear-gradient(135deg, #001204, #001a06) !important;
+      border: 1px solid #22993c !important;
+      color: #b3ffc4 !important;
+      box-shadow: 0 0 0 1px rgba(0, 255, 56, 0.12), 0 0 25px rgba(0, 255, 56, 0.3) !important;
       border-radius: 6px !important;
       backdrop-filter: blur(4px);
       font-family: monospace;
     }
 
     .toast-header {
-      background: #0d0000 !important;
-      border-bottom: 1px solid #330000 !important;
-      color: #ff4d4d !important;
+      background: #000d03 !important;
+      border-bottom: 1px solid #1a662b !important;
+      color: #4dff74 !important;
       font-weight: 600;
       letter-spacing: 1px;
     }
 
     .toast-header small {
-      color: #ff8080 !important;
+      color: #80ff9c !important;
     }
 
     .toast-body {
-      color: #ff9999 !important;
+      color: #99ffaf !important;
       font-size: 0.9rem;
     }
 
@@ -50,38 +50,38 @@
 
     /* ================= GLOBAL SYSTEM MODAL ================= */
     .modal-content {
-      background: radial-gradient(circle at top left, #150000, #060000) !important;
-      border: 1px solid #330000 !important;
-      box-shadow: 0 0 40px rgba(255, 0, 0, 0.3) !important;
-      color: #ffb3b3 !important;
+      background: radial-gradient(circle at top left, #001505, #000601) !important;
+      border: 1px solid #22993c !important;
+      box-shadow: 0 0 0 1px rgba(0, 255, 56, 0.15), 0 0 45px rgba(0, 255, 56, 0.35) !important;
+      color: #b3ffc4 !important;
       border-radius: 8px !important;
     }
 
     .modal-header {
-      border-bottom: 1px solid #330000 !important;
+      border-bottom: 1px solid #1a662b !important;
     }
 
     .modal-title {
-      color: #ff2e2e !important;
+      color: #2eff5c !important;
       letter-spacing: 2px !important;
     }
 
     .modal-body {
-      color: #ff9999 !important;
+      color: #99ffaf !important;
     }
 
     .modal-footer {
-      border-top: 1px solid #330000 !important;
+      border-top: 1px solid #1a662b !important;
     }
 
     .modal-footer .btn-primary {
-      background: linear-gradient(45deg, #8b0000, #ff0000) !important;
+      background: linear-gradient(45deg, #008b1f, #00ff38) !important;
       border: none !important;
       letter-spacing: 1px;
     }
 
     .modal-footer .btn-primary:hover {
-      box-shadow: 0 0 12px red !important;
+      box-shadow: 0 0 12px #2ee86a !important;
     }
 
     .modal-backdrop.show {
@@ -92,50 +92,50 @@
     .jumbotron,
     .challenge-header {
       background: linear-gradient(to bottom, #0a0a0a, #000) !important;
-      border-bottom: 1px solid #220000 !important;
+      border-bottom: 1px solid #002207 !important;
     }
 
     .jumbotron h1 {
-      color: #ff2e2e !important;
+      color: #2eff5c !important;
       letter-spacing: 4px !important;
-      text-shadow: 0 0 10px rgba(255, 0, 0, 0.6);
+      text-shadow: 0 0 10px rgba(0, 255, 56, 0.6);
     }
 
     .card,
     .notification {
-      background: linear-gradient(135deg, #0d0d0d, #150000) !important;
-      border: 1px solid #330000 !important;
-      border-left: 4px solid red !important;
-      box-shadow: 0 0 20px rgba(255, 0, 0, 0.08) !important;
+      background: linear-gradient(135deg, #0d0d0d, #001505) !important;
+      border: 1px solid #267a38 !important;
+      border-left: 4px solid #2ee86a !important;
+      box-shadow: 0 0 0 1px rgba(0, 255, 56, 0.1), 0 0 20px rgba(0, 255, 56, 0.1) !important;
       border-radius: 6px !important;
       transition: 0.3s;
     }
 
     .card:hover {
-      box-shadow: 0 0 25px red !important;
+      box-shadow: 0 0 25px #2ee86a !important;
       transform: translateY(-3px);
     }
 
     .card-title {
-      color: #ff4d4d !important;
+      color: #4dff74 !important;
       font-weight: 600;
       letter-spacing: 1px;
     }
 
     .card-text {
-      color: #ff9999 !important;
+      color: #99ffaf !important;
       font-family: monospace;
     }
 
     .text-muted {
-      color: #ff6a6a !important;
+      color: #6aff8b !important;
       font-size: 0.75rem;
     }
   </style>
   <script>
     document.querySelectorAll('.card').forEach((c, i) => {
       const level = i % 3;
-      if (level === 0) c.style.borderLeftColor = "#ff0000";
+      if (level === 0) c.style.borderLeftColor = "#00ff38";
       if (level === 1) c.style.borderLeftColor = "#ff8800";
       if (level === 2) c.style.borderLeftColor = "#ffcc00";
     });

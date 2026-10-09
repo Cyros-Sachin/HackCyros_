@@ -57,7 +57,7 @@ from CTFd.utils.security.signing import (
 )
 from CTFd.utils.uploads import get_uploader, upload_file
 from CTFd.utils.user import authed, get_current_team, get_current_user, get_ip, is_admin
-
+from flask import make_response
 views = Blueprint("views", __name__)
 
 
@@ -553,7 +553,11 @@ def debug():
 
 @views.route("/robots.txt")
 def robots():
-    text = get_config("robots_txt", "User-agent: *\nDisallow: /admin\n")
+    text = get_config("robots_txt", "User-agent: *\nDisallow: /admin\nAapki Jindagi Mein Aapka Swagat Hai\n/asur")
     r = make_response(text, 200)
     r.mimetype = "text/plain"
     return r
+
+@views.route("/asur")
+def asur():
+    return render_template("asur.html", title="Nothing to see here...")

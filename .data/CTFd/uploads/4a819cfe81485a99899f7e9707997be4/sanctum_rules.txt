@@ -1,0 +1,24 @@
+THE SANCTUM -- RULES OF THE TIME LOOP
+======================================
+
+Doctor Strange greets you. "Welcome, Variant Hacker. I have looped this
+conversation 14,000,605 times to get the rules exactly right. Only one
+of those loops ever mattered."
+
+RULE 1: Don't cheat the scoreboard. Loop count: 14,000,605.
+RULE 2: Don't share flags with other teams. Loop count: 14,000,605.
+RULE 3: Don't attack the CTFd infrastructure itself. Loop count: 14,000,605.
+RULE 4: Have fun; this is a game, not a war. Loop count: 14,000,606.
+RULE 5: Ask staff if a challenge seems broken, not if it seems hard. Loop count: 14,000,605.
+
+"As thanks for reading this far, here is a free flag. I encoded it
+myself, across three of my favorite loops: first I turned it around
+(ROT13), then I wrote every letter as a number (hex), then I folded
+the whole thing in on itself one more time (Base64). Unfold it in the
+right order and it's yours."
+
+ENCODED:
+NTU1MDM0N2I0NjY3NjUzNDYxNzQzMzVmNTkzMDMwNjM1ZjQ2MzQ2MTMxNjc2YzVmNTA3NTMzNzA3ODVmNDMzNDY2NjYzMzcxNWY3MTM5MzMzMDMyNzEzNDZlMzgzMDcyMzg3ZA==
+
+"Decode it correctly and the loop ends. Decode it wrong, and... well,
+you just try again. That's rather the point of a time loop."
